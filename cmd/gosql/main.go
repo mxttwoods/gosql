@@ -13,9 +13,6 @@ import (
 
 // loop over all files in the sql directory and create a single sql file
 func main() {
-	// print a message
-	fmt.Println("Creating sql file")
-
 	// get the current directory
 	dir, err := os.Getwd()
 	if err != nil {
@@ -39,8 +36,10 @@ func main() {
 		fmt.Println(err)
 		os.Exit(1)
 	}
+	// loop over all files in the current directory
 	for _, file := range cwdFiles {
 		if strings.HasPrefix(file.Name(), "deploy-") {
+			// delete the file
 			err := os.Remove(filepath.Join(dir, file.Name()))
 			fmt.Println("Deleted: " + file.Name())
 			if err != nil {
